@@ -458,7 +458,23 @@
         },
         dimension: function(element) {
             return element['outer' + (this.vertical ? 'Height' : 'Width')](true);
-        },
+        },,
+		update: function(){
+			/* set target use list position */
+			
+			var $this = this;
+			var left = -this.list().position().left;
+			
+			this.items().each(function(){
+				if ($(this).position().left > left){
+					return false;
+				}
+				$this._target = $(this);
+				$this._first = $(this);
+			});
+			
+			return this._target;
+		}
         scroll: function(target, animate, callback) {
             if (this.animating) {
                 return this;
